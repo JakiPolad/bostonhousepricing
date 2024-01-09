@@ -31,6 +31,15 @@ def predict_api():
         return jsonify({"error": str(e)})
 
 
+@app.route('/predict', methods = ['POST'])
+def predict():
+    data = [float(x) for  x in request.form.values()] #This will capture all the valuesfrom HTML form, try to convert in float because it is better than int for our model.
+    final_input= scalar.transform(np.array(data).reshape(1,-1)) #standerdize
+    print(final_input)
+    output =regmodel.predict(final_input)[0] #value comes in array that's why we added [0]
+    return render_template("home.html", prediction_text = f"The House price prediction is {output}")
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001, use_reloader=False)
 
