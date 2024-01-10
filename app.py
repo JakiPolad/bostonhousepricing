@@ -3,6 +3,7 @@ import json
 from flask import Flask, request, app, jsonify, url_for, render_template
 import numpy as np
 import pandas as pd
+import os
 
 #starting point of myapplication
 app = Flask(__name__)
@@ -39,9 +40,9 @@ def predict():
     output =regmodel.predict(final_input)[0] #value comes in array that's why we added [0]
     return render_template("home.html", prediction_text = f"The House price prediction is {output}")
 
+port = int(os.environ.get("PORT", 5000))
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5001, use_reloader=False)
-
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=port)
 
 
