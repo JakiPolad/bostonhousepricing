@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import os
 
-#starting point of myapplication
+#starting point of myapplication is following
 app = Flask(__name__)
 
 #Load the ML model
